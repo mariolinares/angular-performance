@@ -4,8 +4,10 @@ import localeEnGb from "@angular/common/locales/en-GB";
 import { ApplicationConfig } from "@angular/core";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import {
+  PreloadAllModules,
   provideRouter,
   withInMemoryScrolling,
+  withPreloading,
   withViewTransitions,
 } from "@angular/router";
 import { appRoutes } from "./app.routes";
@@ -19,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideRouter(
       appRoutes,
+      withPreloading(PreloadAllModules),
       withViewTransitions(),
       withInMemoryScrolling({ scrollPositionRestoration: "enabled" })
     ),

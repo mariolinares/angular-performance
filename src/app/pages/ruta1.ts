@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from "@angular/core";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, interval, map, tap } from "rxjs";
 import { UserService } from "../../user.service";
 
 @Component({
@@ -16,12 +16,12 @@ export class Ruta1 implements OnInit, OnDestroy {
   counter$ = new Observable<number>();
 
   ngOnInit(): void {
-    /* interval(1000)
+    interval(1000)
       .pipe(
         tap(console.log),
         map((val) => val + 1)
       )
-      .subscribe(); */
+      .subscribe();
   }
 
   ngOnDestroy() {
