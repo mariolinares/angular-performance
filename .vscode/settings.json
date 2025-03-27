@@ -113,7 +113,10 @@
    * Format a file on save.
    * Defaults to true.
    */
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
   /**
    * Controls whether the editor should automatically format the line after typing.
    * Defaults to false.

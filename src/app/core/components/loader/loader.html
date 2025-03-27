@@ -12,12 +12,12 @@
 <!-- Si no se proporciona un customTemplate, se usan los templates internos -->
 <ng-template #defaultTemplate>
   <ng-container *ngIf="loading$ | async">
-    <div class="loader-wrapper">
+    <div class="w-screen h-screen flex items-center mx-auto">
       <ng-container [ngSwitch]="loaderKey">
         <!-- Template para navegación de rutas -->
         <ng-template ngSwitchCase="router">
-          <div class="loader router-loader">
-            <div class="spinner"></div>
+          <div class="w-full flex items-center justify-center">
+            <!-- <div class="spinner"></div> -->
             @if(message){
             <p>{{ message }}</p>
             } @else {

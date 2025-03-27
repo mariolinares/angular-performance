@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, httpResource } from '@angular/common/http';
-import { computed, Resource } from '@angular/core';
+import { HttpErrorResponse, httpResource } from "@angular/common/http";
+import { Component, computed, OnDestroy, OnInit } from "@angular/core";
+import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-ruta2',
-  template: `
+  selector: "news",
+  imports: [RouterLink],
+  templateUrl: "./news.html" /* `
     <div class="container">
   <header>
     <h1>Blog Posts</h1>
@@ -35,10 +36,10 @@ import { computed, Resource } from '@angular/core';
     }
   }
 </div>
-  `,
+  ` */,
 })
-export class Ruta2 implements OnInit, OnDestroy {
-  apiUrl = 'https://jsonplaceholder.typicode.com';
+export class News implements OnInit, OnDestroy {
+  apiUrl = "https://jsonplaceholder.typicode.com";
   posts = httpResource<any[]>(`${this.apiUrl}/posts`);
 
   error = computed(() => {
@@ -49,10 +50,10 @@ export class Ruta2 implements OnInit, OnDestroy {
   });
 
   ngOnInit() {
-    console.log('entra Ruta 2');
+    console.log("entra Ruta 2");
   }
 
   ngOnDestroy() {
-    console.log('Destruye Ruta 2');
+    console.log("Destruye Ruta 2");
   }
 }

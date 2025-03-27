@@ -1,23 +1,20 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
   TemplateRef,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { Observable } from 'rxjs';
+} from "@angular/core";
+import { Observable } from "rxjs";
 
-import { trigger, transition, style, animate } from '@angular/animations';
-import { MultiLoadingService } from './multiloading.service';
-
-import { AsyncPipe, CommonModule, NgIf, NgSwitch } from '@angular/common';
+import { AsyncPipe, CommonModule, NgIf, NgSwitch } from "@angular/common";
+import { LoaderService } from "../../services/loader.service";
 @Component({
-  selector: 'app-loader',
-  templateUrl: './loader.html',
-  styleUrls: ['./loader.css'],
+  selector: "app-loader",
+  templateUrl: "./loader.html",
+  styleUrls: ["./loader.css"],
   imports: [CommonModule, AsyncPipe, NgIf, NgSwitch],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [],
 })
 export class Loader implements OnInit {
   /**
@@ -37,14 +34,14 @@ export class Loader implements OnInit {
 
   loading$!: Observable<boolean>;
 
-  constructor(private multiLoadingService: MultiLoadingService) {}
+  constructor(private loaderService: LoaderService) {}
 
   ngOnInit(): void {
     if (!this.loaderKey) {
       throw new Error(
-        'Debe proporcionar una clave para el loader (loaderKey).'
+        "Debe proporcionar una clave para el loader (loaderKey)."
       );
     }
-    this.loading$ = this.multiLoadingService.getLoading$(this.loaderKey);
+    this.loading$ = this.loaderService.getLoading$(this.loaderKey);
   }
 }
