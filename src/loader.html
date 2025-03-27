@@ -1,0 +1,49 @@
+<!-- Si se proporciona un template personalizado, se usa ese -->
+<ng-container *ngIf="customTemplate; else defaultTemplate">
+  <ng-container *ngIf="loading$ | async">
+    <div>
+      <ng-container
+        *ngTemplateOutlet="customTemplate; context: { $implicit: message }"
+      ></ng-container>
+    </div>
+  </ng-container>
+</ng-container>
+
+<!-- Si no se proporciona un customTemplate, se usan los templates internos -->
+<ng-template #defaultTemplate>
+  <ng-container *ngIf="loading$ | async">
+    <div class="loader-wrapper">
+      <ng-container [ngSwitch]="loaderKey">
+        <!-- Template para navegación de rutas -->
+        <ng-template ngSwitchCase="router">
+          <div class="loader router-loader">
+            <div class="spinner"></div>
+            @if(message){
+            <p>{{ message }}</p>
+            } @else {
+            <p>{{ 'Cargando ruta...' }}</p>
+            }
+          </div>
+        </ng-template>
+        <!-- Template para peticiones HTTP -->
+        <ng-template ngSwitchCase="http">
+          <div class="loader http-loader">
+            <div class="spinner"></div>
+            @if(message){
+            <p>{{ message }}</p>
+            } @else {
+            <p>{{ 'Cargando servicio...' }}</p>
+            }
+          </div>
+        </ng-template>
+        <!-- Template por defecto -->
+        <ng-template ngSwitchDefault>
+          <div class="loader default-loader">
+            <div class="spinner"></div>
+            <p>{{ message || 'Cargando...' }}</p>
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
