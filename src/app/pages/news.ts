@@ -1,47 +1,15 @@
 import { HttpErrorResponse, httpResource } from "@angular/common/http";
-import { Component, computed, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, computed } from "@angular/core";
 import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "news",
   imports: [RouterLink],
-  templateUrl: "./news.html" /* `
-    <div class="container">
-  <header>
-    <h1>Blog Posts</h1>
-  </header>
-
-  @if (posts.isLoading()) {
-    <div class="loading">
-      <p>Loading posts...</p>
-      <div class="spinner"></div>
-    </div>
-  } @else {
-    @if (error()) {
-      <div class="error">
-        <p>Error loading posts: {{ error() }}</p>
-      </div>
-    } @else {
-      <div class="posts-grid">
-        @for (post of posts.value(); track post.id) {
-          <article class="post-card">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.body }}</p>
-            <footer>
-              <small>Post ID: {{ post.id }}</small>
-            </footer>
-          </article>
-        }
-      </div>
-    }
-  }
-</div>
-  ` */,
+  templateUrl: "./news.html",
 })
 export class News implements OnInit, OnDestroy {
   apiUrl = "https://jsonplaceholder.typicode.com";
   posts = httpResource<any[]>(`${this.apiUrl}/posts`);
-
   error = computed(() => {
     if (!this.posts.error()) return;
     const error: HttpErrorResponse = this.posts.error() as HttpErrorResponse;

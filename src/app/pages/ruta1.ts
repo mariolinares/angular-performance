@@ -10,7 +10,7 @@ import { UserService } from "../../user.service";
   providers: [],
 })
 export class Ruta1 implements OnInit, OnDestroy {
-  private cancelarOBS$ = new Subject();
+  private cancelarOBS$ = new Subject<void>();
   private userService = inject(UserService);
   count = 0;
   counter$ = new Observable<number>();
@@ -25,8 +25,7 @@ export class Ruta1 implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log("Destruye Ruta 1");
-    this.cancelarOBS$.next({});
+    this.cancelarOBS$.next();
     this.cancelarOBS$.complete();
   }
 }
